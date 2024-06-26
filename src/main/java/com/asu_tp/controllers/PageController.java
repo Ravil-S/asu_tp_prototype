@@ -1,8 +1,10 @@
 package com.asu_tp.controllers;
 
-import com.asu_tp.models.Post;
-import com.asu_tp.models.User;
-import com.asu_tp.repo.PostRepository;
+import com.asu_tp.models.Directional;
+
+
+import com.asu_tp.repo.DirectionalRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -18,34 +20,27 @@ import java.util.Optional;
 @Controller
 public class PageController {
 
+
     @Autowired
-    private PostRepository postRepository;
+    private DirectionalRepository directionalRepository;
 
     @GetMapping("/monitor")
     public String monitor( Model model) {
-        Iterable<Post> posts = postRepository.findAll();
-        model.addAttribute("posts", posts);
+
         return "monitor";
     }
 
     @GetMapping("/tp")
     public String texp( Model model) {
-        Iterable<Post> posts = postRepository.findAll();
-        model.addAttribute("posts", posts);
+
         return "tp";
     }
 
     @GetMapping("/wits")
-    public String blogAdd( Model model) {
+    public String wits( Model model) {
+        Iterable<Directional> datas = directionalRepository.findAll();
+        model.addAttribute("data", datas);
         return "wits";
-    }
-
-    @PostMapping("/wits")
-    public String blogPostAdd(
-            @AuthenticationPrincipal User user,
-            @RequestParam String title, Model model) {
-
-        return "redirect:/wits";
     }
 
 }

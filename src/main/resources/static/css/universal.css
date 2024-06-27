@@ -1,0 +1,386 @@
+*, *:after, *:before {
+	box-sizing: border-box;
+	transition: 0.3s ease-in-out;
+}
+
+:root {
+	--c-text-primary: #162121; /*черный*/
+	--c-text-secondary: #6D7680; /*темно-серый*/
+	--c-action-primary: #F29873; /*персик*/
+	--c-action-primary-accent: #FAF5F1; /*светло-серый*/
+	--c-action-secondary: #63C4B1; /* бирюза */
+	--c-action-tertiary: #F9BE31; /* оранж */
+	--c-bg-primary: #FCFCFC; /* светлый основной фон */
+	--c-bg-secondary: #F7F6FC; /* светло-серый */
+	--c-bg-search: #dcdfe5; /* чуть темнее светло-серый */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    background-color: var(--c-action-primary-accent);
+    color: var(--c-text-primary);
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.styrene {font-family:'Styrene A Web', sans-serif;}
+input, select, button, textarea {
+	font: inherit;
+	color: inherit;
+	outline: 0;
+}
+input, .simpleButton, select, .custom-file-upload {background-color: var(--c-bg-search);
+border: none;
+border-radius: 5px;
+padding-left: 1rem;
+	&:focus {
+		background-color: white;
+		color: black;
+		border: 1px solid black;
+	}
+ }
+
+.wrapper {
+    width: calc(100% - 20px);
+    margin: 20px auto;
+    padding-right: 2.08333333%;
+    background-color: var(--c-bg-primary);
+    border-radius: 15px;
+    box-shadow: 0 0 2px 0 rgba(#000, .1), 0 15px 30px rgba(#444, .1);
+}
+.mainWindow {
+    padding: 20px;
+}
+header {max-height: 82px;}
+
+a { text-decoration: none;
+    user-select: none;
+    color: #0d5e51;
+}
+
+a:hover {
+    color: #000000;
+}
+
+a:active {
+    color: #ffffff;
+}
+
+a:visited {
+    color: #0d5e51;
+}
+/*Стиль экрана Справки*/
+ #info {background-color: #C5E0B3;
+ overflow: auto;
+ top: 7.8125vw;
+ max-height: 48.4375vw;
+ position: absolute;
+ }
+
+
+.simpleButton {
+    padding: 10px;
+    height: auto;
+    cursor: pointer;
+}
+
+.menuButton {
+display: flex; /* Делает кнопку flex-контейнером */
+            align-items: center; /* Центрирует содержимое кнопки по вертикали */
+            justify-content: left; /* Центрирует содержимое кнопки по горизонтали */
+            padding: 10px; /* Добавляет внутренние отступы */
+            width: 100%; /* Заставляет кнопку занимать всю ширину своей колонки */
+            height: 100%;
+            box-sizing: border-box; /* Включает внутренние и внешние отступы в общую ширину */
+            }
+.tableButton {
+display: flex; /* Делает кнопку flex-контейнером */
+            align-items: center; /* Центрирует содержимое кнопки по вертикали */
+            justify-content: left; /*содержимое кнопки по горизонтали */
+            width: 100%; /* Заставляет кнопку занимать всю ширину своей колонки */
+            margin-bottom: 10px;
+            box-sizing: border-box; /* Включает внутренние и внешние отступы в общую ширину */
+            }
+.simpleButton:hover {
+   background-color: black;
+   color: white;
+   border: none;
+   border-radius: 5px;}
+
+.smallBlueButton {
+    height: auto;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--c-action-secondary);
+     }
+.smallBlueButton:hover {
+   border-bottom: 2px solid var(--c-action-secondary);}
+
+.smallYellowButton {
+    height: auto;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--c-action-tertiary);
+     }
+.smallYellowButton:hover {
+   border-bottom: 2px solid var(--c-action-tertiary);}
+
+.small-img {
+	display: block;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    border: none;
+}
+
+.redBorder {border: 2px solid #EC2E13;}
+.redBorder:hover {border: 2px solid #EC2E13; color: #EC2E13}
+.greenBorder {border: 2px solid #0A9336; color: #0A9336;}
+.greenBorder:hover {border: 2px solid #0A9336; color: #0A9336; background: white;}
+
+.errorMessage {color: #EC2E13}
+
+.newIspButton:hover .button-img1 {content: url('/static/css/persOrGroup_inverse.svg');}
+.reitingButton:hover .button-img2 {content: url('/static/css/reiting_inverse.svg');}
+.uprDostupomButton:hover .button-img3 {content: url('/static/css/dostup_inverse.svg');}
+.profilesButton:hover .button-img4 {content: url('/static/css/profiles_inverse.svg');}
+.downloadButton:hover .button-img5 {content: url('/static/css/download_inverse.svg');}
+.libraryButton:hover .button-img6 {content: url('/static/css/library_inverse.svg');}
+.newIspSelButton:hover .button-img-pers {content: url('/static/css/pers_inverse.svg');}
+.newGroupButton:hover .button-img-group {content: url('/static/css/group_inverse.svg');}
+.reitingPersButton:hover .button-img-reitingPers {content: url('/static/css/reitingPers_inverse.svg');}
+.reitingGroupButton:hover .button-img-reitingGroup {content: url('/static/css/reitingGroup_inverse.svg');}
+
+.pageName {font-family:'Styrene A Web', sans-serif;
+  font-weight: bold;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.row_wrap {flex-wrap: wrap;}
+.col {
+  margin-left: 2.08333333%;
+  margin-bottom: 1em;
+  width: 6.25%;
+  min-width: 150px;
+  flex: 1 1 auto;
+}
+.col.span2 { width: calc((6.25%*2) + 2.08333333%); }
+.col.span3 { width: calc((6.25%*3) + (2.08333333%*2)); }
+.col.span4 { width: calc((6.25%*4) + (2.08333333%*3)); }
+.col.span5 { width: calc((6.25%*5) + (2.08333333%*4)); }
+.col.span6 { width: calc((6.25%*6) + (2.08333333%*5)); }
+.col.span7 { width: calc((6.25%*7) + (2.08333333%*6)); }
+.col.span8 { width: calc((6.25%*8) + (2.08333333%*7)); }
+.col.span9 { width: calc((6.25%*9) + (2.08333333%*8)); }
+.col.span10 { width: calc((6.25%*10) + (2.08333333%*9)); }
+.col.span11 { width: calc((6.25%*11) + (2.08333333%*10)); }
+.col.span12 { width: calc((6.25%*12) + (2.08333333%*11)); }
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.mainWindow_simpleButton {width: 50%;
+height:auto;}
+
+.back-img {
+    float: left;
+    background-image: url('back.svg');
+}
+
+ .backButton { 	border: none;
+                        background-color: transparent;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                       }
+.backButton:hover .back-img {
+    background-image: url('back_inverse.svg');
+    }
+.save {
+    justify-content: right;
+    margin-right: 2.08333333%;
+}
+.unvisible {
+display: none;
+}
+.noresize {resize: none;}
+.table-container {
+    max-height: 400px; /* Ограничивает высоту контейнера */
+    overflow-y: auto; /* Добавляет вертикальную прокрутку при необходимости */
+}
+ table {
+            width: 100%;
+            border-collapse: collapse; /* Убирает отступы между ячейками */
+        }
+        th, td {
+            border-bottom: 1px solid gray; /* Добавляет внутренние горизонтальные линии */
+            padding: 8px; /* Добавляет отступы внутри ячеек */
+            text-align: left; /* Выравнивание текста по левому краю */
+        }
+        th {
+            text-transform: uppercase; /* Переводит текст в заголовках в верхний регистр */
+            background-color: var(--c-bg-secondary); /* Устанавливает цвет фона для заголовков */
+        }
+        tr:last-child td {
+            border-bottom: none; /* Убирает нижнюю границу у последней строки */
+        }
+.textareaMessage {
+
+    border: none; /* Убирает все границы */
+    border-top: 1px solid var(--c-text-secondary); /* Добавляет верхнюю горизонтальную рамку */
+    border-bottom: 1px solid var(--c-text-secondary); /* Добавляет нижнюю горизонтальную рамку */
+    resize: none; /* Отключает возможность изменения размеров textarea */
+    box-sizing: border-box; /* Учитывает padding и border в ширину и высоту элемента */
+    padding: 10px; /* Добавляет отступы внутри элемента */
+}
+#popup {
+    margin: 5% 20% 10% 20%;
+    background-color: var(--c-bg-primary);
+    border-radius: 15px;
+    box-shadow: 0 0 2px 0 rgba(#000, .1), 0 15px 30px rgba(#444, .1);
+    display: none;
+    position: absolute;
+    border: none;
+    background-color: var(--c-bg-secondary);
+    padding: 10px;
+    z-index: 1000;
+    min-height: 350px;
+    min-width: 350px;
+    resize: none;
+    transition: 0s ease-in-out;
+    opacity: 90;
+}
+#popup.pageName {border: 1px solid var(--c-text-primary);}
+.textAlignRight {text-align: right;}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: var(--c-action-secondary);
+    color: #fff;
+    border: 1px solid var(--c-action-secondary);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* При наведении */
+.custom-file-upload:hover {
+    background-color: var(--c-text-primary);
+    border-color: var(--c-text-primary);
+}
+
+/* Для элемента рядом */
+span {
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+#content {
+	width: 880px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+#footer {
+	margin-top: 25px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 12px;
+	color: #999;
+}
+
+.demo-container {
+	box-sizing: border-box;
+	width: 850px;
+	height: 450px;
+	padding: 20px 15px 15px 15px;
+	margin: 15px auto 30px auto;
+	border: 1px solid #ddd;
+	background: #fff;
+	background: linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+	box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-ms-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.demo-placeholder {
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+}
+
+fieldset {
+		display: block;
+		-webkit-margin-start: 2px;
+		-webkit-margin-end: 2px;
+		-webkit-padding-before: 0.35em;
+		-webkit-padding-start: 0.75em;
+		-webkit-padding-end: 0.75em;
+		-webkit-padding-after: 0.625em;
+		min-width: -webkit-min-content;
+		border-width: 2px;
+		border-style: groove;
+		border-color: threedface;
+		border-image: initial;
+		padding: 10px;
+}
+
+.legend {
+		display: block;
+		-webkit-padding-start: 2px;
+		-webkit-padding-end: 2px;
+		border-width: initial;
+		border-style: none;
+		border-color: initial;
+		border-image: initial;
+		padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+}
+
+.legendLayer .background {
+    fill: rgba(255, 255, 255, 0.85);
+    stroke: rgba(0, 0, 0, 0.85);
+    stroke-width: 1;
+}
+
+input[type="radio"] {
+		margin-top: -1px;
+		vertical-align: middle;
+}
+
+.tickLabel {
+	line-height: 1.1;
+}

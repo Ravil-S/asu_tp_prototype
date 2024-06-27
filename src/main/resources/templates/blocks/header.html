@@ -1,18 +1,31 @@
-<div th:fragment="header">
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4">АСУ ТП</span>
-    </a>
+<div class="header" th:fragment="header">
+    <div class="row">
+        <div class="col span4">
+            <div class="header-logo">
+                <div onClick="window.location.href='/'" class="header-img logo-img">
+                </div>
+                <div onClick="window.location.href='/'" class="header-logo__name styrene">
+                    <h4>Цифровая буровая</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col center_align">
+            <div class="spravka">
 
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/">Главная</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/monitor">Мониторинг</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/tp">Техпроцесс</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/wits">WITS IN</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml">WITSML IN</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml_out">WITSML OUT</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/ros">ROS</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/user">Пользователи</a>
-    </nav>
+            </div>
+        </div>
+        <div class="col span2"></div>
+        <div class="col span5 center_align">
+            <textarea th:text="${logged_username}" name="?" placeholder="Дата; Время; Пользователь" class="userInfo" rows=1 maxlength="1000" readonly></textarea>
+        </div>
+
+        <div class="col center_align save" sec:authorize="isAuthenticated()">
+            <div class="logout">
+            <form th:action="@{/logout}" method="post">
+                <input class="header-img logout-img" type="submit" value=""/>
+            </form>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
+

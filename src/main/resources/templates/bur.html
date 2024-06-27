@@ -16,7 +16,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
 </head>
 <body>
-	<div class="wrapper mainWindow" th:each="">
+	<div class="wrapper mainWindow" >
 	<header th:insert="blocks/header.html :: header"></header>
 	<main>
 		<div class="row">
@@ -28,9 +28,9 @@
 		<div class="row row_wrap">
 			<div class="col">
 				<form  th:action="${page}" method="post" enctype="multipart/form-data">
-					<select size=1 class="select" th:name="">
+					<select size=1 class="select" th:name="${nodata}">
 						<option disabled>Выберите установку:</option>
-						<option th:each=" : ${}" th:value="${.}" th:text="${.get}">
+						<option th:each=" el: ${well_id_list}" th:value="${el}" th:text="${el}">
 						</option>
 					</select>
 				</form>
@@ -44,7 +44,7 @@
 
 			</div>
 			<div class="col">
-				<form th:action="''" target="_self">
+				<form th:action="'/'" target="_self">
 					<button class="simpleButton tableButton">История
 					</button>
 				</form>
@@ -53,17 +53,17 @@
 		<div class="row row_wrap">
 			<div class="col">
 				<label>Текущий процесс</label>
-				<output th:text="${el.get}" maxlength="1000" size="15"  ></output>
+				<output th:text="${nodata}" maxlength="1000" size="15"  ></output>
 			</div>
 			<div class="col">
-				<th:block th:switch="${el.getStatus}">
+				<th:block th:switch="${nodata}">
 					<div th:case="'Активен'">
-						<form th:action="''" target="_self">
+						<form th:action="'/'" target="_self">
 							<button class="smallYellowButton" href="/">Прервать</button>
 						</form>
 					</div>
 					<div th:case="'Прерван'">
-						<form th:action="'/persons/'+${el.id}+'/unremove'" target="_self">
+						<form th:action="'/persons/'" target="_self">
 							<button class="smallYellowButton" href="/">Возобновить</button>
 						</form>
 					</div>
@@ -72,7 +72,7 @@
 			<div class="col">
 			</div>
 			<div class="col">
-				<form th:action="'/persons/'+${el.id}+'/data'" target="_self">
+				<form th:action="'/persons/'" target="_self">
 					<button class="simpleButton tableButton" href="/">План работ</button>
 				</form>
 			</div>
@@ -81,7 +81,7 @@
 		<div class="row row_wrap">
 			<div class="col">
 				<label>Статус</label>
-				<output th:text="${el.getStatus}" maxlength="1000" size="15"  ></output>
+				<output th:text="${nodata}" maxlength="1000" size="15"  ></output>
 			</div>
 			<div class="col">
 
@@ -91,7 +91,7 @@
 			</div>
 
 			<div class="col">
-				<form th:action="'/persons/'+${el.id}+'/integral_indics'" target="_self">
+				<form th:action="'/'" target="_self">
 					<button class="simpleButton tableButton">Состояние агрегатов</button>
 				</form>
 			</div>
@@ -106,36 +106,40 @@
 				</div>
 				<script type="text/javascript">
 					$(function() {
-                        var totalPoints = 300;
 
-                        function getRandomData(data) {
-                            if (data.length > 0)
-                                data = data.slice(1);
+						var datasets1_1 = [
+							{ x: 0, y: 10 }, { x: 1, y: 20 }, { x: 2, y: 30 }, { x: 3, y: 40 }, { x: 4, y: 50 }
+						];
+						var datasets1_2 = [
+							{ x: 0, y: 5 }, { x: 1, y: 15 }, { x: 2, y: 25 }, { x: 3, y: 35 }, { x: 4, y: 45 }
+						];
+						var datasets2_1 = [
+							{ x: 0, y: 12 }, { x: 1, y: 22 }, { x: 2, y: 32 }, { x: 3, y: 42 }, { x: 4, y: 52 }
+						];
+						var datasets2_2 = [
+							{ x: 0, y: 10 }, { x: 1, y: 20 }, { x: 2, y: 30 }, { x: 3, y: 40 }, { x: 4, y: 50 }
+						];
+						var datasets3_1 = [
+							{ x: 0, y: 5 }, { x: 1, y: 15 }, { x: 2, y: 25 }, { x: 3, y: 35 }, { x: 4, y: 45 }
+						];
+						var datasets3_2 = [
+							{ x: 0, y: 12 }, { x: 1, y: 22 }, { x: 2, y: 32 }, { x: 3, y: 42 }, { x: 4, y: 52 }
+						];
 
-                            while (data.length < totalPoints) {
-                                var prev = data.length > 0 ? data[data.length - 1] : 50,
-                                    y = prev + Math.random() * 10 - 5;
+						datasets1_1 = [(${plot_data})];
+						datasets1_2 = [(${plot_data})];
 
-                                if (y < 0) {
-                                    y = 0;
-                                } else if (y > 100) {
-                                    y = 100;
-                                }
+						datasets2_1 = [(${plot_data})];
+						datasets2_2 = [(${plot_data})];
 
-                                data.push(y);
-                            }
+						datasets3_1 = [(${plot_data})];
+						datasets3_2 = [(${plot_data})];
 
-                            var res = [];
-                            for (var i = 0; i < data.length; ++i) {
-                                res.push([i, data[i]])
-                            }
-
-                            return res;
-                        }
-
-                        var data1_1 = [], data1_2 = [];
-                        var data2_1 = [], data2_2 = [];
-                        var data3_1 = [], data3_2 = [];
+						function convertData(data) {
+									return data.map(function(point) {
+										return [point.x, point.y];
+									});
+								}
 
                         var updateInterval = 30;
 
@@ -176,36 +180,36 @@
 
 
                         var plot1 = $.plot("#chart1", [
-                            { data: getRandomData(data1_1), label: "Фактическая", lines: { show: true, lineWidth: 1 } },
-                            { data: getRandomData(data1_2), label: "Расчётная", lines: { show: true, lineWidth: 1, dashPattern: [4, 4] } }
+                            { data: convertData(datasets1_1), label: "Фактическая", lines: { show: true, lineWidth: 1 } },
+                            { data: convertData(datasets1_2), label: "Расчётная", lines: { show: true, lineWidth: 1, dashPattern: [4, 4] } }
                         ], options1);
 
                         var plot2 = $.plot("#chart2", [
-                            { data: getRandomData(data2_1), label: "Фактическая", lines: { show: true, lineWidth: 1 } },
-                            { data: getRandomData(data2_2), label: "Расчётная", lines: { show: true, lineWidth: 1, dashPattern: [4, 4] } }
+                            { data: convertData(datasets2_1), label: "Фактическая", lines: { show: true, lineWidth: 1 } },
+                            { data: convertData(datasets2_2), label: "Расчётная", lines: { show: true, lineWidth: 1, dashPattern: [4, 4] } }
                         ], options2);
 
                         var plot3 = $.plot("#chart3", [
-                            { data: getRandomData(data3_1), label: "Фактическая", lines: { show: true, lineWidth: 1 } },
-                            { data: getRandomData(data3_2), label: "Расчётная", lines: { show: true, lineWidth: 1, dashPattern: [4, 4] } }
+                            { data: convertData(datasets3_1), label: "Фактическая", lines: { show: true, lineWidth: 1 } },
+                            { data: convertData(datasets3_2), label: "Расчётная", lines: { show: true, lineWidth: 1, dashPattern: [4, 4] } }
                         ], options2);
 
                         function update() {
                             plot1.setData([
-                                { data: getRandomData(data1_1), label: "Фактическая" },
-                                { data: getRandomData(data1_2), label: "Расчётная" }
+                                { data: convertData(datasets1_1), label: "Фактическая" },
+                                { data: convertData(datasets1_2), label: "Расчётная" }
                             ]);
                             plot1.draw();
 
                             plot2.setData([
-                                { data: getRandomData(data2_1), label: "Фактическая" },
-                                { data: getRandomData(data2_2), label: "Расчётная" }
+                                { data: convertData(datasets2_1), label: "Фактическая" },
+                                { data: convertData(datasets2_2), label: "Расчётная" }
                             ]);
                             plot2.draw();
 
                             plot3.setData([
-                                { data: getRandomData(data3_1), label: "Фактическая" },
-                                { data: getRandomData(data3_2), label: "Расчётная" }
+                                { data: convertData(datasets3_1), label: "Фактическая" },
+                                { data: convertData(datasets3_2), label: "Расчётная" }
                             ]);
                             plot3.draw();
 

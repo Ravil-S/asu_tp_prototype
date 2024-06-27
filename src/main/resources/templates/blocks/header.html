@@ -19,6 +19,17 @@
             <textarea th:text="${logged_username}" name="?" placeholder="Дата; Время; Пользователь" class="userInfo" rows=1 maxlength="1000" readonly></textarea>
         </div>
 
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/">Главная</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/monitor">Мониторинг</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/tp">Техпроцесс</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/wits">WITS IN</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml">WITSML IN</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml_out">WITSML OUT</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/ros">ROS</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/user">Пользователи</a>
+        </nav>
+
         <div class="col center_align save" sec:authorize="isAuthenticated()">
             <div class="logout">
             <form th:action="@{/logout}" method="post">

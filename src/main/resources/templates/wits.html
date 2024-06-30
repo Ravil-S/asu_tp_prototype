@@ -19,19 +19,18 @@
 <div class="container mt-5">
     <h1>Данные инклинометрии</h1>
     <div th:each="el : ${data}" class="alert alert-info mt-2">
-        <p> <b>Идентификатор скважины:</b> <span th:text="${el.wellId}"/> </p>
-        <p> <b>Боковой ствол:</b> <span th:text="${el.sidetrack}"/> </p>
-        <p> <b>Идентификатор записи:</b> <span th:text="${el.recordId}"/> </p>
-        <p> <b>Идентификатор последовательности записей:</b> <span th:text="${el.sequenceId}"/> </p>
-        <p> <b>Дата:</b> <span th:text="${el.mesuarmentDate}"/> </p>
-        <p> <b>Время:</b> <span th:text="${el.mesuarmentTime}"/> </p>
-        <p> <b>Глубина по показанию датчика:</b> <span th:text="${el.depthSvy}"/> </p>
-        <p> <b>Положение по оси Север-Юг:</b> <span th:text="${el.svyNorthSouthPosition}"/> </p>
-        <p> <b>Положение по оси Восток-Запад:</b> <span th:text="${el.svyEastWestPosition}"/> </p>
-    </div>
-</div>
+        <!--   <p> <b>Идентификатор скважины:</b> <span th:text="${el.wellId}"/> </p>
+           <p> <b>Боковой ствол:</b> <span th:text="${el.sidetrack}"/> </p>
+           <p> <b>Идентификатор записи:</b> <span th:text="${el.recordId}"/> </p> -->
+           <p> <b>Идентификатор последовательности записей:</b> <span th:text="${el.name}"/> </p>
+           <p> <b>Дата:</b> <span th:text="${el.mesuarmentDate}"/> </p>
+           <p> <b>Глубина по показанию датчика:</b> <span th:text="${el.depthSvy}"/> </p>
+           <p> <b>Положение по оси Север-Юг:</b> <span th:text="${el.svyNorthSouthPosition}"/> </p>
+           <p> <b>Положение по оси Восток-Запад:</b> <span th:text="${el.svyEastWestPosition}"/> </p>
+       </div>
+   </div>
 
-<div th:insert="blocks/footer :: footer"></div>
+   <div th:insert="blocks/footer :: footer"></div>
 
-</body>
-</html>
+   </body>
+   </html>

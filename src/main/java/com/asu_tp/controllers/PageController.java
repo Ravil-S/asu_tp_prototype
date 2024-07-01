@@ -28,6 +28,8 @@ public class PageController {
 
     @GetMapping("/monitor")
     public String monitor( Model model) {
+        int stage=1;
+
         ArrayList<String> well_id_list = new ArrayList<>();
 
         Optional<Well> well = wellRepository.findFirstByOrderByIdDesc();
@@ -49,7 +51,7 @@ public class PageController {
                     List<Record> recordList = sequenceList.get(sequenceList.size()-1).getRecords();
 
                     recordList.sort((h1, h2) -> h1.getMesuarmentDate().compareTo(h2.getMesuarmentDate()));
-
+                    //передача данных о глубине
                     StringBuilder str = new StringBuilder("[ ");
                     for (Record record : recordList  ) {
                         str.append("{ x: ");
@@ -62,7 +64,7 @@ public class PageController {
                     }
                     str.append(" ]");
                     plot_data = String.valueOf(str);
-
+                    //генерация планируемых данных о глубине
                     Random rnd1 = new Random(145235);
                     str = new StringBuilder("[ ");
                     for (int i=0; i< recordList.size(); i++) {
@@ -79,6 +81,7 @@ public class PageController {
                     str.append(" ]");
                     plot_data11 = String.valueOf(str);
 
+                    //передача данных о отклонении
                     str = new StringBuilder("[ ");
                     for (Record record : recordList  ) {
                         str.append("{ x: ");
@@ -92,6 +95,7 @@ public class PageController {
                     str.append(" ]");
                     plot_data2 = String.valueOf(str);
 
+                    //генерация планируемых данных о отклонении
                     Random rnd2 = new Random(457834);
                     str = new StringBuilder("[ ");
                     for (int i=0; i< recordList.size(); i++) {
@@ -108,6 +112,7 @@ public class PageController {
                     str.append(" ]");
                     plot_data21 = String.valueOf(str);
 
+                    //передача данных о отклонении
                     str = new StringBuilder("[ ");
                     for (Record record : recordList  ) {
                         str.append("{ x: ");
@@ -121,6 +126,7 @@ public class PageController {
                     str.append(" ]");
                     plot_data3 = String.valueOf(str);
 
+                    //генерация планируемых данных о отклонении
                     Random rnd3 = new Random(655686);
                     str = new StringBuilder("[ ");
                     for (int i=0; i< recordList.size(); i++) {
@@ -136,9 +142,14 @@ public class PageController {
                     }
                     str.append(" ]");
                     plot_data31 = String.valueOf(str);
+
+                    stage=recordList.get(recordList.size()-1).getStageNumber();
                 }
             }
         }
+
+        model.addAttribute("stage", stage);
+
         model.addAttribute("well_id_list", well_id_list);
         String nodata = "нет данных";
         model.addAttribute("nodata", nodata);

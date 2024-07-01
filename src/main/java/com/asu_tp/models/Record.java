@@ -31,6 +31,8 @@ public class Record {
     private Date mesuarmentDate;//"07050\n" + //Дата
    // private Date mesuarmentTime;//"07060\n" + //Время
 
+    private int stage;  ////"07070\n"код деятельности
+
     private double depthSvy =0;//"07083408" Глубина по показанию датчика – измеренная
     private double svyNorthSouthPosition =0;// "07180" Положение по оси Север-Юг (m)
     private double svyEastWestPosition =0;//"07190" Положение по оси Восток-Запад (m)
@@ -49,6 +51,7 @@ public class Record {
         depthSvy = dto.getDepthSvy();
         svyEastWestPosition = dto.getSvyEastWestPosition();
         svyNorthSouthPosition = dto.getSvyNorthSouthPosition();
+        stage=dto.getStage();
     }
 
     public void replace(DirectionalDTO dto){
@@ -65,5 +68,18 @@ public class Record {
         depthSvy = dto.getDepthSvy();
         svyEastWestPosition = dto.getSvyEastWestPosition();
         svyNorthSouthPosition = dto.getSvyNorthSouthPosition();
+        stage=dto.getStage();
+    }
+
+    public int getStageNumber() {
+        int num=1;
+        if (stage > 100) {
+            num = stage-99;
+        } else if (stage>1) {
+            num = stage+5;
+        }
+        System.out.println("stage "+stage);
+        System.out.println("num "+num);
+        return num;
     }
 }

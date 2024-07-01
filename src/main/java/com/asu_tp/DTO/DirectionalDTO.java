@@ -17,7 +17,7 @@ public class DirectionalDTO {
     private String mesuarmentDate;//"07050\n" + //Дата
     private String mesuarmentTime;//"07060\n" + //Время
 
-    private int status;  ////"07070\n"код деятельности
+    private int stage;  ////"07070\n"код деятельности
 
     private double depthSvy =0;//"07083408" Глубина по показанию датчика – измеренная
     private double svyNorthSouthPosition =0;// "07180" Положение по оси Север-Юг (m)

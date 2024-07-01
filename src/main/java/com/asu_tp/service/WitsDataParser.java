@@ -60,8 +60,8 @@ public class WitsDataParser {
                     dto.setMesuarmentTime(value);
                     continue;
                 }
-                if (record.contains("0706")) {
-                    dto.setStatus(Integer.parseInt(value));
+                if (record.contains("0707")) {
+                    dto.setStage(Integer.parseInt(value));
                     continue;
                 }
                 if (record.contains("0708")) {
@@ -101,7 +101,7 @@ public class WitsDataParser {
     }
 
     public void writeToDB(WellRepository wellRepository){
-        if (directionalList.size()>10){
+        if (directionalList.size()>0){
             for (DirectionalDTO dto:directionalList) {
                 if (dto!=null) {
                     Optional<Well>  well = wellRepository.findFirstByName(dto.getWellId());

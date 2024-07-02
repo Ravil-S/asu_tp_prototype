@@ -1,16 +1,16 @@
 package com.asu_tp.service;
 
-import com.asu_tp.models.Directional;
-import com.asu_tp.repo.DirectionalRepository;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.asu_tp.DTO.DirectionalDTO;
+import com.asu_tp.models.Well;
+import com.asu_tp.repo.WellRepository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class WitsDataParser {
 
    // private ArrayList<DirectionalDTO> directionalDTOS = new ArrayList<>();
-    private ArrayList<Directional> directionalList = new ArrayList<>();
+    private ArrayList<DirectionalDTO> directionalList = new ArrayList<>();
 
     public WitsDataParser() {
     }
@@ -18,7 +18,7 @@ public class WitsDataParser {
 
     public void parse(String data){
 
-        Directional dto = null;
+        DirectionalDTO dto = null;
 
         String[] words = data.split("\n");
 
@@ -27,7 +27,7 @@ public class WitsDataParser {
             word = word.replace ("\r", "");
 
             if (word.contains("&&") && dto==null) {
-                dto = new Directional();
+                dto = new DirectionalDTO();
                 continue;
             }
 
@@ -58,6 +58,10 @@ public class WitsDataParser {
                 }
                 if (record.contains("0706")) {
                     dto.setMesuarmentTime(value);
+                    continue;
+                }
+                if (record.contains("0707")) {
+                    dto.setStage(Integer.parseInt(value));
                     continue;
                 }
                 if (record.contains("0708")) {
@@ -96,10 +100,20 @@ public class WitsDataParser {
         */
     }
 
-    public void writeToDB(DirectionalRepository directionalRepository){
-        if (directionalList.size()>10){
-            for (Directional dto:directionalList) {
-                if (dto!=null) { directionalRepository.save(dto);}
+    public void writeToDB(WellRepository wellRepository){
+        if (directionalList.size()>0){
+            for (DirectionalDTO dto:directionalList) {
+                if (dto!=null) {
+                    Optional<Well>  well = wellRepository.findFirstByName(dto.getWellId());
+                    System.out.println(well);
+                    if (!well.isEmpty()) {
+                        well.orElse(null).addSidetrackData(dto);
+                        wellRepository.save(well.orElse(null));
+                    }
+                    else {
+                        wellRepository.save(new Well(dto));
+                    }
+                }
             }
             directionalList.clear();
         }

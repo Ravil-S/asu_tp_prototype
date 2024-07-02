@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="ru"></html>
+<head>
+    <title>Загрузка нового показателя - АС Интеграл</title>
+    <link rel="stylesheet" href="/static/fonts/roboto/roboto.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/static/css/styleParam_read.css">
+    <link rel="stylesheet" href="/static/css/styleheader.css">
+	<link type="image/x-icon" rel="shortcut icon" href="/static/favicon.ico">
+	<link type="image/png" sizes="16x16" rel="icon" href="/static/favicon-16x16.png">
+  <link type="image/png" sizes="32x32" rel="icon" href="/static/favicon-32x32.png">
+  <link type="image/png" sizes="96x96" rel="icon" href="/static/favicon-96x96.png">
+  <link type="image/png" sizes="120x120" rel="icon" href="/static/favicon-120x120.png">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="wrapper">
+<header th:insert="blocks/header.html :: header"></header>
+	<main>
+<div class="container mt-5 mb-5">
+    <div id="dobav">	
+
+        <button>		
+            <p>
+                <a><span>Загрузка нового показателя</span></a>
+            </p>
+        </button>
+        </form>
+    </div>
+    <div >
+        <button id="back" onclick="history.go(-1);"><span>Назад</span></button>
+    </div>
+    <form th:action="${page}" method="post" enctype="multipart/form-data">
+        <input type="file"  name="datafile" placeholder="Выберете фаил с результатами измерений" class="form-control"></br>
+        <button type="submit" class="btn btn-success"><span>Загрузить данные</span></button>
+        <button id="save" type="submit">
+            <p><span>Сохранить</span></p>
+        </button>
+    </form>
+</div>
+</main>
+<!--<footer>
+    <form action="/" target="_self">
+        <button id="button1"><span>Кнопка1</span>
+            
+        </button>
+        </form>
+        <form action="/" target="_self">
+            <button id="button2"><span>Кнопка2</span></button>
+        </form>
+        <form action="/" target="_self">
+                <button id="button3"><span>Кнопка3</span></button>
+        </form>
+</footer>-->
+    </div>
+</body>
+</html>

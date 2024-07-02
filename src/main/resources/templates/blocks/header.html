@@ -1,18 +1,31 @@
-<div th:fragment="header">
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4">АСУ ТП</span>
-    </a>
+<div class="header container-fluid" th:fragment="header">
+    <div class="row align-items-center py-2">
+        <div class="col-6 col-md-2 d-flex align-items-center">
+            <div onClick="window.location.href='/'" class="header-logo d-flex align-items-center">
+                <div class="header-img logo-img"></div>
+                <div class="ms-2 styrene">Цифровая буровая</div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mt-2 mt-md-0">
+            <nav class="nav nav-pills nav-justified">
+                <a class="nav-link" href="/">Мониторинг</a>
+                <a class="nav-link" href="/history">История</a>
+                <a class="nav-link" href="/wits">WITS IN</a>
+                <a class="nav-link" href="/witsml/import">WITSML IN</a>
+                <a class="nav-link" href="/witsml/export">WITSML OUT</a>
+                <a class="nav-link" href="/user">Пользователи</a>
+            </nav>
+        </div>
+        <div class="col-12 col-md-3 mt-2 mt-md-0 d-flex align-items-center">
+            <textarea th:text="${logged_username}" placeholder="Дата; Время; Пользователь" class="form-control userInfo" rows="1" readonly></textarea>
+        </div>
+        <div class="col-12 col-md-1 mt-2 mt-md-0 text-end">
+            <form th:action="@{/logout}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-link p-0 logout">
+                    <div class="header-img logout-img"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/">Главная</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/monitor">Мониторинг</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/tp">Техпроцесс</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/wits">WITS IN</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml">WITSML IN</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml_out">WITSML OUT</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/ros">ROS</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/user">Пользователи</a>
-    </nav>
-</div>
-</div>

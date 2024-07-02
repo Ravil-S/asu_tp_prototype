@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta name="robots" content="noindex,follow" charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Выбор установки - Цифровая буровая</title>
+	<link rel="stylesheet" href="/static/css/universal.css">
+	<link rel="stylesheet" href="/static/fonts/styrene/stylesheet.css">
+	<link rel="stylesheet" href="/static/css/header.css">
+	<link type="image/x-icon" rel="shortcut icon" href="/static/favicon.ico">
+	<link type="image/png" sizes="16x16" rel="icon" href="/static/favicon-16x16.png">
+  <link type="image/png" sizes="32x32" rel="icon" href="/static/favicon-32x32.png">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		.stage {
+            margin: 5px 0 5px 0 ;
+            border: 1px solid #ccc;
+            display: inline-block;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .current-stage {
+            background-color: #007bff;
+            color: white;
+        }
+	</style>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flot@4.2.2/dist/es5/jquery.flot.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+
+	<script type="text/javascript">
+        function refreshPage() {
+            window.location.reload();
+        }
+        setInterval(refreshPage, 5000);
+  </script>
+</head>
+<body>
+	<div class="container ml-1" >
+	<header th:insert="blocks/header.html :: header"></header>
+	<main>
+		<div class="row">
+			<div class="col-md-4 pageName">
+			Выбор установки
+			</div>
+			<div class="col col-md-4"></div>
+		</div>
+		<div class="row"  style="margin-bottom: 10px;">
+			<div class="col-md-4">
+				<form  th:action="${page}" method="post" enctype="multipart/form-data">
+					<select size=1 class="select" th:name="${nodata}">
+						<option disabled>Выберите установку:</option>
+						<option th:each=" el: ${well_id_list}" th:value="${el}" th:text="${el}">
+						</option>
+					</select>
+				</form>
+			</div>
+			<div class="col-md-1" >
+				<form th:action="'/history'" target="_self">
+					<button class="btn btn-primary" href="/">Показать</button>
+				</form>
+			</div>
+			<div class="col-md-7">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-10 lightBack" style="text-align: center; border-left: solid #ccc 1px; border-right: solid #ccc 1px; border-top: solid #ccc 1px">Роботизированные работы</div>
+		</div>
+		<div class="row stagesRow">
+		</div>
+		<script>
+			$(document).ready(function() {
+                var stages = [
+                    "Накручивание свечи на силовой верхний привод",
+                    "Подача свечи на ось скважины",
+                    "Перемещение свечи от оси скважины в подсвечник",
+                    "Захват свечи в автоматическом элеваторе",
+                    "Смазка и очистка резьбы перед свинчиванием",
+                    "Прием и сопровождение бурильной трубы на ось скважины",
+                    "Выход на режим",
+                    "Подход к забою",
+                    "Бурение с вращением",
+                    "Отход от забоя на 1-2 метра",
+                    "Подъем-спуск БИ на расстояние 7-15 метров без вращения",
+                    "Направленное бурение без вращения буровой колонны",
+                    "Отход от забоя на 1-2 метра",
+                    "Выход на режим с вращением СВП и продолжение бурения",
+                    "Выработка нагрузки - регулирование",
+                    "Проработка - движение вверх/вниз",
+                    "Расхаживание",
+                    "Становление в клинья",
+                    "       Завершение     бурения      "
+                ];
+
+                var currentStage = 1; // Текущий этап, будет приходить из БД
+
+				currentStage = [(${stage})];
+
+                stages.forEach(function(stage, index) {
+                    var stageDiv = $("<div>", {
+                        "class": "stage col-2",
+                        "data-index": index + 1,
+                        "text": stage
+                    });
+                    if (index + 1 === currentStage) {
+                        stageDiv.addClass("current-stage");
+                    }
+                    if (index === 2 || index === 3 || index === 4 || index === 5 || index === 1) {
+                        stageDiv.addClass("lightBack");
+                    }
+                    $(".stagesRow").append(stageDiv);
+                });
+            });
+		</script>
+		<div class="row row_wrap">
+			<div class="col-md-2">
+				<label>Статус</label>
+				<output class="badge badge-info" th:text="${active}" maxlength="1000" size="15"  ></output>
+			</div>
+			<div class="col-md-1">
+
+			</div>
+			<div class="col-md-1">
+				<th:block th:switch="${active}">
+					<div th:case="'Активен'">
+						<form th:action="'/'" target="_self">
+							<button class="btn btn-danger" href="/">Остановить</button>
+						</form>
+					</div>
+					<div th:case="'Прерван'">
+						<form th:action="'/'" target="_self">
+							<button class="btn btn-danger" href="/">Возобновить</button>
+						</form>
+					</div>
+				</th:block>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-1">
+				<form th:action="${monitor}" target="_self">
+					<button class="btn btn-primary" th:href="${monitor}" th:text="${mesuarments}">Показать историю</button>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+					<div class="chart-container mb-5" id="chart1-container">
+						<div id="chart1" class="chart"></div>
+					</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+					<div class="chart-container mb-5" id="chart2-container">
+						<div id="chart2" class="chart"></div>
+					</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+					<div class="chart-container" id="chart3-container">
+						<div id="chart3" class="chart"></div>
+					</div>
+			</div>
+		</div>
+				<script type="text/javascript">
+					$(function() {
+
+						var datasets1_1 = [
+							{ x: 0, y: 10 }, { x: 1, y: 20 }, { x: 2, y: 30 }, { x: 3, y: 40 }, { x: 4, y: 50 }
+						];
+						var datasets1_2 = [
+							{ x: 0, y: 5 }, { x: 1, y: 15 }, { x: 2, y: 25 }, { x: 3, y: 35 }, { x: 4, y: 45 }
+						];
+						var datasets2_1 = [
+							{ x: 0, y: 12 }, { x: 1, y: 22 }, { x: 2, y: 32 }, { x: 3, y: 42 }, { x: 4, y: 52 }
+						];
+						var datasets2_2 = [
+							{ x: 0, y: 10 }, { x: 1, y: 20 }, { x: 2, y: 30 }, { x: 3, y: 40 }, { x: 4, y: 50 }
+						];
+						var datasets3_1 = [
+							{ x: 0, y: 5 }, { x: 1, y: 15 }, { x: 2, y: 25 }, { x: 3, y: 35 }, { x: 4, y: 45 }
+						];
+						var datasets3_2 = [
+							{ x: 0, y: 12 }, { x: 1, y: 22 }, { x: 2, y: 32 }, { x: 3, y: 42 }, { x: 4, y: 52 }
+						];
+
+						datasets1_1 = [(${plot_data11})];
+						datasets1_2 = [(${plot_data})];
+
+						datasets2_1 = [(${plot_data21})];
+						datasets2_2 = [(${plot_data2})];
+
+						datasets3_1 = [(${plot_data31})];
+						datasets3_2 = [(${plot_data3})];
+
+						function convertData(data) {
+									return data.map(function(point) {
+										return [point.x, point.y];
+									});
+								}
+
+                        var updateInterval = 1;
+
+                        var options1 = {
+                            series: {
+                                shadowSize: 0
+                            },
+                            yaxis: {
+                                min: 0,
+                                max: 100,
+                                axisLabel: 'Глубина, м'
+                            },
+                            xaxis: {
+                                axisLabel: 'Время,с'
+                            },
+                            legend: {
+                                show: false,
+                                position: 'ne',
+                                container: null,
+                    			noColumns: 1
+                            },
+							grid: {
+								hoverable: true,
+								clickable: true
+							},
+							resize: true
+                        };
+						var options2 = {
+                            series: {
+                                shadowSize: 0
+                            },
+                            yaxis: {
+                                min: 0,
+                                max: 100,
+                                axisLabel: 'Отклонение С-Ю, м'
+                            },
+                            xaxis: {
+                                axisLabel: 'Время, c'
+                            },
+                            legend: {
+                            show: false,
+                                position: 'ne',
+                                container: null,
+                    			noColumns: 1
+                            }
+                        };
+
+                        var options3 = {
+                            series: {
+                                shadowSize: 0
+                            },
+                            yaxis: {
+                                min: 0,
+                                max: 100,
+                                axisLabel: 'Отклонение З-В, м'
+                            },
+                            xaxis: {
+                                axisLabel: 'Время, c'
+                            },
+                            legend: {
+                            show: false,
+                                position: 'ne',
+                                container: null,
+                    			noColumns: 1
+                            }
+                        };
+
+
+                        var plot1 = $.plot("#chart1", [
+                           // { data: convertData(datasets1_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                            { data: convertData(datasets1_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
+                        ], options1);
+
+                        var plot2 = $.plot("#chart2", [
+                           // { data: convertData(datasets2_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                            { data: convertData(datasets2_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
+                        ], options2);
+
+                        var plot3 = $.plot("#chart3", [
+                           // { data: convertData(datasets3_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                            { data: convertData(datasets3_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
+                        ], options3);
+
+                        function update() {
+                            plot1.setData([
+                           //     { data: convertData(datasets1_1), label: "Расчётная", lines: { show: true, lineWidth: 5 }},
+                                { data: convertData(datasets1_2), label: "Фактическая" , lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
+                            ]);
+                            plot1.draw();
+
+                            plot2.setData([
+                              //  { data: convertData(datasets2_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                                { data: convertData(datasets2_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] }  }
+                            ]);
+                            plot2.draw();
+
+                            plot3.setData([
+                             //   { data: convertData(datasets3_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                                { data: convertData(datasets3_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] }  }
+                            ]);
+                            plot3.draw();
+
+                            setTimeout(update, updateInterval);
+                        }
+
+                        update();
+                    });
+				</script>
+			</div>
+		</div>
+		<div class="row" >
+			<form target="_self">
+				<div class="col center_align">
+					<div class="backButton"><button class="header-img back-img" onclick="history.go(-1);"></button> <span onclick="history.go(-1);">Назад</span></div>
+				</div>
+			</form>
+		</div>
+	</main>
+	</div>
+</body>
+</html>

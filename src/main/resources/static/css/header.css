@@ -1,0 +1,18 @@
+        .header-logo { cursor: pointer; }
+        .header-logo:hover .logo-img { background-image: url('Union_light.svg'); }
+        .logout:hover .logout-img { background-image: url('Sign_out_inverse.svg'); }
+        .header-img {
+            display: block;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-position: 50% 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            margin-right: 1rem;
+            border: none;
+        }
+        .logo-img { background-image: url("Union.svg"); }
+        .logout-img { background-image: url('Sign_out.svg'); background-color: transparent; }
+        .userInfo { min-width: 250px; resize: none; }

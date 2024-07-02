@@ -1,7 +1,7 @@
 package com.asu_tp.service.impl;
 
 
-import com.asu_tp.repo.DirectionalRepository;
+import com.asu_tp.repo.WellRepository;
 import com.asu_tp.service.MessageService;
 import com.asu_tp.service.WitsDataParser;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MessageServiceImpl implements MessageService {
 
     @Autowired
-    private DirectionalRepository directionalRepository;
+    private WellRepository wellRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageServiceImpl.class);
 
@@ -31,7 +31,7 @@ public class MessageServiceImpl implements MessageService {
         System.out.println("Receive message: "+ messageContent);
 
         parser.parse(messageContent);
-        parser.writeToDB(directionalRepository);
+        parser.writeToDB(wellRepository);
       //  String responseContent = String.format("Message \"%s\" is processed", messageContent);
         String responseContent = "";
 

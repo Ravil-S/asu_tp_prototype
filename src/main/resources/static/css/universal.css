@@ -23,7 +23,7 @@ body {
     color: var(--c-text-primary);
     width: 90%;
     max-width: 1300px;
-    margin: 0 auto;
+    margin: 20px;
 }
 .styrene {font-family:'Styrene A Web', sans-serif;}
 input, select, button, textarea {
@@ -53,7 +53,7 @@ padding-left: 1rem;
 .mainWindow {
     padding: 20px;
 }
-header {max-height: 82px;}
+
 
 a { text-decoration: none;
     user-select: none;
@@ -80,11 +80,6 @@ a:visited {
  }
 
 
-.simpleButton {
-    padding: 10px;
-    height: auto;
-    cursor: pointer;
-}
 
 .menuButton {
 display: flex; /* Делает кнопку flex-контейнером */
@@ -103,31 +98,6 @@ display: flex; /* Делает кнопку flex-контейнером */
             margin-bottom: 10px;
             box-sizing: border-box; /* Включает внутренние и внешние отступы в общую ширину */
             }
-.simpleButton:hover {
-   background-color: black;
-   color: white;
-   border: none;
-   border-radius: 5px;}
-
-.smallBlueButton {
-    height: auto;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: var(--c-action-secondary);
-     }
-.smallBlueButton:hover {
-   border-bottom: 2px solid var(--c-action-secondary);}
-
-.smallYellowButton {
-    height: auto;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: var(--c-action-tertiary);
-     }
-.smallYellowButton:hover {
-   border-bottom: 2px solid var(--c-action-tertiary);}
 
 .small-img {
 	display: block;
@@ -146,7 +116,7 @@ display: flex; /* Делает кнопку flex-контейнером */
 .redBorder:hover {border: 2px solid #EC2E13; color: #EC2E13}
 .greenBorder {border: 2px solid #0A9336; color: #0A9336;}
 .greenBorder:hover {border: 2px solid #0A9336; color: #0A9336; background: white;}
-
+.lightBack {background-color: var(--c-bg-search);}
 .errorMessage {color: #EC2E13}
 
 .newIspButton:hover .button-img1 {content: url('/static/css/persOrGroup_inverse.svg');}
@@ -163,6 +133,7 @@ display: flex; /* Делает кнопку flex-контейнером */
 .pageName {font-family:'Styrene A Web', sans-serif;
   font-weight: bold;
 }
+/*
 .row {
     display: flex;
     justify-content: space-between;
@@ -187,6 +158,7 @@ display: flex; /* Делает кнопку flex-контейнером */
 .col.span10 { width: calc((6.25%*10) + (2.08333333%*9)); }
 .col.span11 { width: calc((6.25%*11) + (2.08333333%*10)); }
 .col.span12 { width: calc((6.25%*12) + (2.08333333%*11)); }
+*/
 label {
     display: block;
     margin-bottom: 5px;
@@ -383,4 +355,35 @@ input[type="radio"] {
 
 .tickLabel {
 	line-height: 1.1;
+}
+
+		.chart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.chart {
+    flex-grow: 1;
+    height: 400px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        flex-direction: column;
+    }
+    .chart {
+        width: 100%;
+        height: 300px;
+    }
+        .header {
+            padding: 15px;
+        }
+
+        .main {
+            padding: 15px;
+        }
 }

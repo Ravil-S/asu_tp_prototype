@@ -3,17 +3,18 @@
 <head>
     <title th:text="${title}" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/static/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/universal.css">
+    <link rel="stylesheet" href="/static/fonts/styrene/stylesheet.css">
+    <link rel="stylesheet" href="/static/css/header.css">
 </head>
 <body>
-
+<div class="container ml-1" >
 <header th:insert="blocks/header :: header"></header>
 
 <div class="container mt-5">
     <h1>Техпроцесс</h1>
 </div>
-
-<div th:insert="blocks/footer :: footer"></div>
-
+</div>
 </body>
 </html>

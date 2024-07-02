@@ -1,131 +1,18 @@
-.header-logo { 	border: none;
-             	background-color: transparent;
-             	display: flex;
-             	align-items: center;
-             	margin-left: 1rem;
-             	    cursor: pointer;
-             }
-.header-logo-name:hover, .containerForIcon:hover, .containerForIcon:active {
-    background-color: #0d5e51;
-    color: #d5febf;
-
-}
-.header-logo:hover .logo-img {
-    background-image: url('Union_light.svg');
-    }
- .spravka { 	border: none;
-                       	background-color: transparent;
-                       	display: flex;
-                       	align-items: center;
-                       	margin-left: 1rem;
-                       }
-.spravka:hover .spravka-img {
-    background-image: url('spravka_inverse.svg');
-    }
- .logout { 	border: none;
-                        background-color: transparent;
-                        display: flex;
-                        align-items: center;
-                        margin-left: 1rem;
-                       }
-.logout:hover .logout-img {
-    background-image: url('Sign_out_inverse.svg');
-    }
-
-.header-img {
-	display: block;
-	width: 2rem;
-	height: 2rem;
-	border-radius: 50%;
-	background-position: 50% 50%;
-	background-size: cover;
-	background-repeat: no-repeat;
-    cursor: pointer;
-    margin-right: 1rem;
-    border: none;
-}
-.logo-img {	background-image: url("Union.svg");}
-.header-logo-name {
-	margin-left: .75rem;
-	cursor: pointer;
-}
-.center_align {display: flex;
-align-items: center;}
-a {
-    text-decoration: none;
-    user-select: none; /* Запрещаем выделение текста */
-    color: #0d5e51;
-}
-img {
-	display: block;
-	max-width: 100%;
-}
-a:hover {
-    color: #000000; /* Цвет текста при наведении */
-}
-
-a:active {
-    color: #ffffff; /* Цвет текста при нажатии */
-}
-
-a:visited {
-    color: #0d5e51; /* Цвет текста после посещения ссылки */
-}
-
-.spravka-img {
-    background-image: url('spravka.svg');
-}
-
-.spravka-img::marker {
-    content: ''; /* Удаляем контент псевдоэлемента */
-    font-size: 14px; /* Размер стрелочки */
-    margin-left: 5px; /* Отступ между словом "Справка" и стрелочкой */
-    vertical-align: middle; /* Выравниваем стрелочку по вертикали относительно текста */
-}
-
-details {
-    margin-left: auto;
-}
-
-.logout-img {
-    background-image: url('Sign_out.svg');
-    background-color: transparent;
-    cursor: pointer;
-}
-.userInfo {
-border-radius: 99em;
-	background-color: var(--c-bg-search);
-	border: none;
-	padding-left: 1rem;
-	height: 3rem;
-	transition: width 380ms ease;
-	width: 400px;
-    overflow: hidden;
-    resize: none;
-    }
-
-
-/* Стиль экрана Справки */
-#info {
-    background-color: #ffffed;
-    overflow: auto;
-    top: 7.8125vw;
-    max-height: 48.4375vw;
-    position: absolute;
-}
-
-
-
-
-#frame_spravka_page {
-    position: fixed; /* Позиционирование фиксированное */
-    top: 120px; /* Отступ сверху, чтобы блок начинался ниже шапки */
-    left: 0; /* Блок будет располагаться слева */
-    width: 100%; /* Ширина блока будет равна ширине страницы */
-    height: calc(100% - 60px); /* Высота блока будет равна высоте страницы минус высота шапки */
-    background-color: rgba(255, 255, 255, 0.9); /* Прозрачный фон */
-    z-index: 700; /* Поверх всех остальных элементов */
-    padding: 20px; /* Добавим отступы для содержимого блока */
-    box-sizing: border-box; /* Учтем padding в размере блока */
-    overflow: auto; /* Если содержимое блока будет больше размеров блока, будет появляться полоса прокрутки */
-}
+        .header-logo { cursor: pointer; }
+        .header-logo:hover .logo-img { background-image: url('Union_light.svg'); }
+        .logout:hover .logout-img { background-image: url('Sign_out_inverse.svg'); }
+        .header-img {
+            display: block;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-position: 50% 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            margin-right: 1rem;
+            border: none;
+        }
+        .logo-img { background-image: url("Union.svg"); }
+        .logout-img { background-image: url('Sign_out.svg'); background-color: transparent; }
+        .userInfo { min-width: 250px; resize: none; }

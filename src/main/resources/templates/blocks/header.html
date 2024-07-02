@@ -1,41 +1,32 @@
-<div class="header" th:fragment="header">
-    <div class="row">
-        <div class="col span4">
-            <div class="header-logo">
-                <div onClick="window.location.href='/'" class="header-img logo-img">
-                </div>
-                <div onClick="window.location.href='/'" class="header-logo__name styrene">
-                    <h4>Цифровая буровая</h4>
-                </div>
+<div class="header container-fluid" th:fragment="header">
+    <div class="row align-items-center py-2">
+        <div class="col-6 col-md-2 d-flex align-items-center">
+            <div onClick="window.location.href='/'" class="header-logo d-flex align-items-center">
+                <div class="header-img logo-img"></div>
+                <div class="ms-2 styrene">Цифровая буровая</div>
             </div>
         </div>
-        <div class="col center_align">
-            <div class="spravka">
-
-            </div>
+        <div class="col-12 col-md-6 mt-2 mt-md-0">
+            <nav class="nav nav-pills nav-justified">
+                <a class="nav-link" href="/">Главная</a>
+                <a class="nav-link" href="/monitor">Мониторинг</a>
+                <a class="nav-link" href="/tp">Техпроцесс</a>
+                <a class="nav-link" href="/wits">WITS IN</a>
+                <a class="nav-link" href="/witsml">WITSML IN</a>
+                <a class="nav-link" href="/witsml_out">WITSML OUT</a>
+                <a class="nav-link" href="/ros">ROS</a>
+                <a class="nav-link" href="/user">Пользователи</a>
+            </nav>
         </div>
-        <div class="col span2"></div>
-        <div class="col span5 center_align">
-            <textarea th:text="${logged_username}" name="?" placeholder="Дата; Время; Пользователь" class="userInfo" rows=1 maxlength="1000" readonly></textarea>
+        <div class="col-12 col-md-3 mt-2 mt-md-0 d-flex align-items-center">
+            <textarea th:text="${logged_username}" placeholder="Дата; Время; Пользователь" class="form-control userInfo" rows="1" readonly></textarea>
         </div>
-
-        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/">Главная</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/monitor">Мониторинг</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/tp">Техпроцесс</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/wits">WITS IN</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml">WITSML IN</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/witsml_out">WITSML OUT</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/ros">ROS</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/user">Пользователи</a>
-        </nav>
-
-        <div class="col center_align save" sec:authorize="isAuthenticated()">
-            <div class="logout">
-            <form th:action="@{/logout}" method="post">
-                <input class="header-img logout-img" type="submit" value=""/>
+        <div class="col-12 col-md-1 mt-2 mt-md-0 text-end">
+            <form th:action="@{/logout}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-link p-0 logout">
+                    <div class="header-img logout-img"></div>
+                </button>
             </form>
-            </div>
         </div>
     </div>
 </div>

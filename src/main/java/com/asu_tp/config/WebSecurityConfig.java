@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().exceptionHandling(); //что бы рест работал без логина
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/registration", "/monitor/**", "/static/**", "/wits/**", "/witsml/**").permitAll()
+                    .antMatchers("/", "/registration", "/history/**", "/static/**", "/wits/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()

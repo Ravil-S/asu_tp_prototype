@@ -26,7 +26,7 @@ public class PageController {
 
 
 
-    @GetMapping("/monitor")
+    @GetMapping("/history")
     public String monitor( Model model) {
         int stage=1;
 
@@ -151,8 +151,178 @@ public class PageController {
         model.addAttribute("stage", stage);
 
         model.addAttribute("well_id_list", well_id_list);
-        String nodata = "Активен";
-        model.addAttribute("nodata", nodata);
+
+        model.addAttribute("active", "Активен");
+        model.addAttribute("mesuarments", "Последние измерения");
+        model.addAttribute("monitor", "/");
+
+        model.addAttribute("plot_data", plot_data);
+        model.addAttribute("plot_data11", plot_data11);
+        model.addAttribute("plot_data2", plot_data2);
+        model.addAttribute("plot_data21", plot_data21);
+        model.addAttribute("plot_data31", plot_data31);
+        model.addAttribute("plot_data3", plot_data3);
+
+        return "bur.html";
+    }
+
+    @GetMapping("/")
+    public String monitor1( Model model) {
+        int stage=1;
+
+        ArrayList<String> well_id_list = new ArrayList<>();
+
+        Optional<Well> well = wellRepository.findFirstByOrderByIdDesc();
+
+        String plot_data ="[ { x: 0, y: 1 },{ x: 1, y: 1 } ]";
+        String plot_data11 ="[ { x: 0, y: 1 },{ x: 1, y: 1 } ]";
+        String plot_data2 ="[ { x: 0, y: 1 },{ x: 1, y: 1 } ]";
+        String plot_data21 ="[ { x: 0, y: 1 },{ x: 1, y: 1 } ]";
+        String plot_data3 ="[ { x: 0, y: 1 },{ x: 1, y: 1 } ]";
+        String plot_data31 ="[ { x: 0, y: 1 },{ x: 1, y: 1 } ]";
+
+        if (!well.isEmpty()){
+            well_id_list.add(well.orElse(null).getName());
+
+            List<Sidetrack> sidetrackList =  well.orElse(null).getSidetracks();
+            if (sidetrackList.size()>0){
+                List<Sequence> sequenceList = sidetrackList.get(sidetrackList.size()-1).getSequences();
+                if (sequenceList.size()>0){
+                    List<Record> recordList = sequenceList.get(sequenceList.size()-1).getRecords();
+
+                    recordList.sort((h1, h2) -> h1.getMesuarmentDate().compareTo(h2.getMesuarmentDate()));
+                    //передача данных о глубине
+
+                    Long maxtime=(recordList.get(recordList.size()-1).getMesuarmentDate().getTime()-
+                            recordList.get(0).getMesuarmentDate().getTime())/1000;
+
+                    StringBuilder str = new StringBuilder("[ ");
+                    for (Record record : recordList  ) {
+                        Long time = ((record.getMesuarmentDate().getTime()-
+                                recordList.get(0).getMesuarmentDate().getTime())/1000);
+                        if (time+200<maxtime){
+                            continue;
+                        }
+
+                        str.append("{ x: ");
+                        str.append(time);
+                        str.append(", y: ");
+                        str.append(record.getDepthSvy());
+                        str.append(" },");
+                    }
+                    str.append(" ]");
+                    plot_data = String.valueOf(str);
+
+                    //генерация планируемых данных о глубине
+                    Random rnd1 = new Random(145235);
+                    str = new StringBuilder("[ ");
+                    for (int i=0; i< recordList.size(); i++) {
+                        Long time = ((recordList.get(i).getMesuarmentDate().getTime()-
+                                recordList.get(0).getMesuarmentDate().getTime())/1000);
+
+                        if (time+200<maxtime){
+                            continue;
+                        }
+
+                        str.append("{ x: ");
+                        str.append(time);
+                        str.append(", y: ");
+                        double deltaDepth = 0 ;
+                        if (i>0) deltaDepth = recordList.get(i).getDepthSvy()-recordList.get(i-1).getDepthSvy();
+                        str.append(recordList.get(i).getDepthSvy()+((rnd1.nextDouble()-0.5) *0.2*deltaDepth));
+                        str.append(" },");
+                    }
+                    str.append(" ]");
+                    plot_data11 = String.valueOf(str);
+
+                    //передача данных о отклонении
+                    str = new StringBuilder("[ ");
+                    for (Record record : recordList  ) {
+                        Long time = ((record.getMesuarmentDate().getTime()-
+                                recordList.get(0).getMesuarmentDate().getTime())/1000);
+                        if (time+200<maxtime){
+                            continue;
+                        }
+                        str.append("{ x: ");
+                        str.append(time);
+                        str.append(", y: ");
+                        str.append(record.getSvyEastWestPosition());
+                        str.append(" },");
+                    }
+                    str.append(" ]");
+                    plot_data2 = String.valueOf(str);
+
+                    //генерация планируемых данных о отклонении
+                    Random rnd2 = new Random(457834);
+                    str = new StringBuilder("[ ");
+                    for (int i=0; i< recordList.size(); i++) {
+                        Long time = ((recordList.get(i).getMesuarmentDate().getTime()-
+                                recordList.get(0).getMesuarmentDate().getTime())/1000);
+                        if (time+200<maxtime){
+                            continue;
+                        }
+                        str.append("{ x: ");
+                        str.append(time);
+                        str.append(", y: ");
+                        double deltaDepth = 0 ;
+                        if (i>0) deltaDepth = recordList.get(i).getSvyEastWestPosition()-recordList.get(i-1).getSvyEastWestPosition();
+                        str.append(recordList.get(i).getSvyEastWestPosition()+((rnd2.nextDouble()-0.5) *0.2*deltaDepth));
+                        str.append(" },");
+                    }
+                    str.append(" ]");
+                    plot_data21 = String.valueOf(str);
+
+                    //передача данных о отклонении
+                    str = new StringBuilder("[ ");
+
+                    for (Record record : recordList  ) {
+                        Long time = ((record.getMesuarmentDate().getTime()-
+                                recordList.get(0).getMesuarmentDate().getTime())/1000);
+                        if (time+200<maxtime){
+                            continue;
+                        }
+
+                        str.append("{ x: ");
+                        str.append(time);
+                        str.append(", y: ");
+                        str.append(record.getSvyNorthSouthPosition());
+                        str.append(" },");
+                    }
+                    str.append(" ]");
+                    plot_data3 = String.valueOf(str);
+
+                    //генерация планируемых данных о отклонении
+                    Random rnd3 = new Random(655686);
+                    str = new StringBuilder("[ ");
+                    for (int i=0; i< recordList.size(); i++) {
+                        Long time = ((recordList.get(i).getMesuarmentDate().getTime()-
+                                recordList.get(0).getMesuarmentDate().getTime())/1000);
+                        if (time+200<maxtime){
+                            continue;
+                        }
+
+                        str.append("{ x: ");
+                        str.append(time);
+                        str.append(", y: ");
+                        double deltaDepth = 0 ;
+                        if (i>0) deltaDepth = recordList.get(i).getSvyNorthSouthPosition()-recordList.get(i-1).getSvyNorthSouthPosition();
+                        str.append(recordList.get(i).getSvyNorthSouthPosition()+((rnd1.nextDouble()-0.5) *0.2*deltaDepth));
+                        str.append(" },");
+                    }
+                    str.append(" ]");
+                    plot_data31 = String.valueOf(str);
+
+                    stage=recordList.get(recordList.size()-1).getStageNumber();
+                }
+            }
+        }
+
+        model.addAttribute("stage", stage);
+
+        model.addAttribute("well_id_list", well_id_list);
+        model.addAttribute("active", "Активен");
+        model.addAttribute("mesuarments", "История измерений");
+        model.addAttribute("monitor", "/history");
 
         model.addAttribute("plot_data", plot_data);
         model.addAttribute("plot_data11", plot_data11);

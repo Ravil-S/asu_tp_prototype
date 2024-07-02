@@ -151,7 +151,7 @@ public class PageController {
         model.addAttribute("stage", stage);
 
         model.addAttribute("well_id_list", well_id_list);
-        String nodata = "нет данных";
+        String nodata = "Активен";
         model.addAttribute("nodata", nodata);
 
         model.addAttribute("plot_data", plot_data);
@@ -161,7 +161,7 @@ public class PageController {
         model.addAttribute("plot_data31", plot_data31);
         model.addAttribute("plot_data3", plot_data3);
 
-        return "bur";
+        return "bur.html";
     }
 
     @GetMapping("/tp")

@@ -220,7 +220,7 @@
                                 axisLabel: 'Время,с'
                             },
                             legend: {
-                                show: true,
+                                show: false,
                                 position: 'ne',
                                 container: null,
                     			noColumns: 1
@@ -244,7 +244,7 @@
                                 axisLabel: 'Время, c'
                             },
                             legend: {
-                            show: true,
+                            show: false,
                                 position: 'ne',
                                 container: null,
                     			noColumns: 1
@@ -264,7 +264,7 @@
                                 axisLabel: 'Время, c'
                             },
                             legend: {
-                            show: true,
+                            show: false,
                                 position: 'ne',
                                 container: null,
                     			noColumns: 1
@@ -273,35 +273,35 @@
 
 
                         var plot1 = $.plot("#chart1", [
-                            { data: convertData(datasets1_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                           // { data: convertData(datasets1_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
                             { data: convertData(datasets1_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
                         ], options1);
 
                         var plot2 = $.plot("#chart2", [
-                            { data: convertData(datasets2_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                           // { data: convertData(datasets2_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
                             { data: convertData(datasets2_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
                         ], options2);
 
                         var plot3 = $.plot("#chart3", [
-                            { data: convertData(datasets3_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                           // { data: convertData(datasets3_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
                             { data: convertData(datasets3_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
                         ], options3);
 
                         function update() {
                             plot1.setData([
-                                { data: convertData(datasets1_1), label: "Расчётная", lines: { show: true, lineWidth: 5 }},
+                           //     { data: convertData(datasets1_1), label: "Расчётная", lines: { show: true, lineWidth: 5 }},
                                 { data: convertData(datasets1_2), label: "Фактическая" , lines: { show: true, lineWidth: 5, dashPattern: [4, 4] } }
                             ]);
                             plot1.draw();
 
                             plot2.setData([
-                                { data: convertData(datasets2_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                              //  { data: convertData(datasets2_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
                                 { data: convertData(datasets2_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] }  }
                             ]);
                             plot2.draw();
 
                             plot3.setData([
-                                { data: convertData(datasets3_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
+                             //   { data: convertData(datasets3_1), label: "Расчётная", lines: { show: true, lineWidth: 5 } },
                                 { data: convertData(datasets3_2), label: "Фактическая", lines: { show: true, lineWidth: 5, dashPattern: [4, 4] }  }
                             ]);
                             plot3.draw();

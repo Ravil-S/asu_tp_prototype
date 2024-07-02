@@ -119,7 +119,7 @@
 			<div class="col-md-1">
 
 			</div>
-			<div class="col-md1">
+			<div class="col-md-1">
 				<th:block th:switch="${nodata}">
 					<div th:case="'Активен'">
 						<form th:action="'/'" target="_self">
@@ -133,8 +133,11 @@
 					</div>
 				</th:block>
 			</div>
-
-			<div class="col">
+			<div class="col-md-1"></div>
+			<div class="col-md-1">
+				<form th:action="'/'" target="_self">
+					<button class="btn btn-primary" href="/">Показать историю</button>
+				</form>
 			</div>
 		</div>
 		<div class="row">
